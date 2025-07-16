@@ -29,7 +29,7 @@ func main() {
 	flag.Parse()
 
 	over := make(map[string]any)
-	if host != { over["host"] = host }
+	if host != "" { over["host"] = host }
 	if port != 0 { over["port"] = port }
 	if verbose { over["verbose"] = true }
 	if selfSigned { over["tls.self_signed"] = true }

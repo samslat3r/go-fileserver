@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/viper"
 )
 
+// App struct holds the application configuration
 type App struct {
 	Host        string        `mapstructure:"host"`
 	Port        int           `mapstructure:"port"`
@@ -15,7 +16,7 @@ type App struct {
 	BcryptHash string      `mapstructure:"bcrypt_hash"`
 	TokenTTL   time.Duration `mapstructure:"token_ttl"`
 }
-
+// Load reads the configuration from a file or environment variables.
 func Load(cfgPath string, ovverrides map[string]any) (*App, error) {
 	v := viper.New()
 

@@ -22,9 +22,11 @@ type Handlers struct {
 	tmpl *template.Template
 }
 
+// NewHandlers creates a new Handlers instance with the provided config
+// and parses the templates from the embedded filesystem.
 func NewHandlers(cfg *config.App) *Handlers {
 	t := template.Must(template.ParseFS(tmplFS, "web/templates/*.tmpl"))
-	return &Handlers {
+	return &Handlers{
 		cfg:  cfg,
 		tmpl: t,
 	}
@@ -37,7 +39,7 @@ func (h *Handlers) RedirectRoot(w http.ResponseWriter, r *http.Request) {
 
 // ViewDir list directory contents
 func (h *Handlers) ViewDir(w http.ResponseWriter, r *http.Request) {
-	dir := filepath.Clean(r.URL.Query().Get("dir")
+	dir := filepath.Clean(r.URL.Query().Get("dir"))
 	if dir == "" {
 		dir = "/"
 	}
@@ -60,7 +62,6 @@ func (h *Handlers) ViewDir(w http.ResponseWriter, r *http.Request) {
 
 // GetFile serves a file to the client with "Content-Disposition attachment"
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition
-
 func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 	f := filepath.Clean(r.URL.Query().Get("file"))
 	abs := filepath.Clean(filepath.Join(h.cfg.StorageDir, f))
@@ -71,7 +72,6 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 // Upload saves multipart file
 // multipart/form-data info
 // https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4
-
 func (h *Handlers) Upload (w http.ResponseWriter, r *http.Request) {
 
 	if err := r.ParseMultiPartForm(32 << 20); err != nil {

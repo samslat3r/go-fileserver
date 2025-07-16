@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// EnsureSelfSigned: create cert/key pair iff they do not exist
+//EnsureSelfSigned checks if the self-signed certificate and key exist at the specified paths.
 func EnsureSelfSigned(certPath, keyPath, host string) error {
 	if exists(certPath) && exists(keyPath) {
 		return nil // If they are already there

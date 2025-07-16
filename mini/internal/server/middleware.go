@@ -16,7 +16,7 @@ func sessionStore(cfg *config.App) *sessions.CookieStore {
 	return sessions.NewCookieStore([]byte(cfg.SessionKey))
 }
 
-// Check the session cookie; handler will decide what to do (e.g. call ensureLogin) if it is missing
+// AuthMiddleware checks the session cookie; handler will decide what to do (e.g. call ensureLogin) if it is missing
 func AuthMiddleware(cfg *config.App, next http.Handler) http.Handler {
 	store := sessionStore(cfg)
 	return http.HandlerFunc(func(w http.ResponseWriter, t *http.Request) {

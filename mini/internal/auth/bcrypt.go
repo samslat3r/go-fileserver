@@ -6,7 +6,6 @@ import (
 
 // HashPassword returns a bcrypt hash using a given cost
 // Cost of 0 uses bcrypt.DefaultCost
-
 func HashPassword(password string, cost int) (string, error) {
 	if cost == 0 {
 		cost = bcrypt.DefaultCost

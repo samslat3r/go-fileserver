@@ -6,7 +6,8 @@ import (
 	"mini/internal/config"
 )
 
-func NewRouter(h *Handlers cfg *config.App) http.Handler {
+// NewRouter creates a new HTTP router with the provided handlers and configuration.
+func NewRouter(h *Handlers, cfg *config.App) http.Handler {
 	r := mux.NewRouter()
 	r.Use(authMiddleware(cfg))
 
